@@ -65,6 +65,13 @@ function App() {
     setTimeout(runSimulation, 100);
   }, [])
 
+  let rando = [];
+  while(rando.length <10) {
+    let r = Math.floor(Math.random()*10) +1;
+    if(rando.indexOf(r)===-1) rando.push(r);
+  }
+  console.log(rando)
+
   return (
     <>
       <div style={{backgroundColor: "black", width: "100%", display: "flex", flexDirection: "column", justifyContent: "space-evenly",color: "white", textAlign: "center"}}>
@@ -84,6 +91,17 @@ function App() {
           </button>
         </div>
       </div>
+      <div style={{backgroundColor: "black", width: "100%", display: "flex", flexDirection: "column", justifyContent: "space-evenly",color: "white", textAlign: "center"}}>
+          <div style={{padding: "0px 0px 20px 0px"}}>
+
+            <button onClick={() => {
+                let randoGrid = produce(grid, gridCopy => {
+                  gridCopy[rando[0]][rando[0]] = 'purple'
+                })
+                setGrid(randoGrid)
+              }}>Random</button>
+          </div>
+          </div>
       <div id="grid container" style={{width: "100%",
           height: "auto"}}>
         <div className="App" style={{
@@ -110,23 +128,20 @@ function App() {
                 border: '1px solid grey'
               }}/>
             ))}
-            {/* <button onClick={() => {
-              setGrid(randomGrid)
-            }}>Random</button> */}
         </div>
-        <div style={{backgroundColor: "black", width: "100%", display: "flex", flexDirection: "column", justifyContent: "space-evenly",color: "white", textAlign: "center"}}>
+        {/* <div style={{backgroundColor: "black", width: "100%", display: "flex", flexDirection: "column", justifyContent: "space-evenly",color: "white", textAlign: "center"}}>
           <div style={{padding: "0px 0px 20px 0px"}}>
-            <button onClick={()=> {
-              setRunning(!running);
-              if (!running) {
-                runningRef.current = true;
-                runSimulation()
-              }
-            /* BUTTON: Is it running? If so, show Stop. If not, show Start */
-            }}>{running ? 'STOP': 'START'}
-            </button>
+
+            <button onClick={() => {
+                let randoGrid = produce(grid, gridCopy => {
+                  gridCopy[rando[0]][rando[0]] = 'purple'
+                })
+                setGrid(randoGrid)
+              }}>Random</button>
           </div>
-          <div className="App" style={{
+        </div> */}
+
+          {/* <div className="App" style={{
             display: "grid",
             gridTemplateColumns: `repeat(${columnCount}, 20px)`,
             backgroundColor: "black", paddingBottom: "100px"}}>
@@ -137,16 +152,11 @@ function App() {
                 style={{
                   width: 20,
                   height: 20,
-                  backgroundColor: grid[Math.floor((Math.random()*625)+1), i][Math.floor((Math.random()*625)+1), j] = 'purple',
+                  // backgroundColor: grid[Math.floor(rando[0])][Math.floor(rando[0])] = "purple",
                   border: '1px solid grey'
                 }}/>
               ))}
-              {/* <button onClick={() => {
-                setGrid(randomGrid)
-              }}>Random</button> */}
-          </div>
-        </div>
-
+          </div> */}
         </div>
 
     </>
